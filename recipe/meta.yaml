@@ -46,7 +46,7 @@ test:
     - cmake
     - cython
     - git
-    - make  # not win[]
+    - make  # [not win]
     - mock
     - ninja
     - path.py >=11.5.0
