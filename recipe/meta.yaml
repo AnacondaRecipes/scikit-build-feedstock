@@ -30,7 +30,7 @@ requirements:
     - python
     - cmake
     - distro
-    - make
+    - make  # [not win]
     - packaging
     - setuptools >=42.0.0
     - wheel >=0.32.0
@@ -46,7 +46,7 @@ test:
     - cmake
     - cython
     - git
-    - make
+    - make  # not win[]
     - mock
     - ninja
     - path.py >=11.5.0
