@@ -17,8 +17,11 @@ build:
 requirements:
   host:
     - python
+    - cython >=0.25.1
     - packaging
+    - path.py >=11.5.0
     - pip
+    - python-build >=0.7
     - setuptools >=42
     - setuptools_scm
     - toml
@@ -38,12 +41,12 @@ test:
   source_files:
     - tests/*
   requires:
-    - {{ compiler('c') }}  # [unix]
-    - {{ compiler('cxx') }}  # [unix]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - cmake
     - cython
     - git
-    - make  # [unix]
+    - make
     - mock
     - ninja
     - path.py >=11.5.0
