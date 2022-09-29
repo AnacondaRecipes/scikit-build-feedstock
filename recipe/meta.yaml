@@ -73,7 +73,7 @@ about:
     fundamentally just glue between the setuptools Python module and CMake.
 
   doc_url: https://scikit-build.readthedocs.org
-  dev_url: https ://github.com/scikit-build/scikit-build
+  dev_url: https://github.com/scikit-build/scikit-build
 
 extra:
   recipe-maintainers:
