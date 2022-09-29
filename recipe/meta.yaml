@@ -1,39 +1,39 @@
-{% set version = "0.11.1" %}
-{% set sha256 = "25f040b04ae0c8473fe57af009c7c83bd9122a88b8ef5b19dd4805812fe03d24" %}
+{% set name = "scikit-build" %}
+{% set version = "0.15.0" %}
+{% set sha256 = "e723cd0f3489a042370b9ea988bbb9cfd7725e8b25b20ca1c7981821fcf65fb9" %}
 
 package:
-  name: scikit-build
+  name:  {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/scikit-build/scikit-build/archive/{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/s/scikit-build/scikit-build-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  number: 2
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
 
 requirements:
-  build:
-    - cmake
-    - ninja
-    - pip
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
   host:
-    - packaging
-    - pip
     - python
-    - setuptools
+    - cython >=0.25.1
+    - packaging
+    - path.py >=11.5.0
+    - pip
+    - python-build >=0.7
+    - setuptools >=42
+    - setuptools_scm
+    - toml
     - wheel
   run:
+    - python
     - cmake
     - distro
+    - make  # [not win]
     - packaging
-    - python
-    - ninja
-    - setuptools
-    - wheel
+    - setuptools >=42.0.0
+    - wheel >=0.32.0
 
 test:
   imports:
@@ -41,30 +41,39 @@ test:
   source_files:
     - tests/*
   requires:
-    - {{ compiler('c') }}  # [unix]
-    - {{ compiler('cxx') }}  # [unix]
-    - make  # [unix]
-    - mock
-    - path.py
-    - pytest
-    - pytest-mock
-    - pytest-cov
-    - pytest-runner
-    - six
-    - git
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - cmake
-    - ninja
     - cython
+    - git
+    - make  # [not win]
+    - mock
+    - ninja
+    - path.py >=11.5.0
+    - pip
+    - pytest >=4.5.0
+    - pytest-cov >=2.7.1
+    - pytest-mock >=1.10.4
+    - pytest-runner >=5.1
     - requests
+    - six >=1.10.0
 
 about:
-  home: http://github.com/scikit-build/scikit-build
+  home: https://github.com/scikit-build/scikit-build
   license: MIT
   license_family: MIT
   license_file: LICENSE
+  license_url: https://github.com/scikit-build/scikit-build/blob/master/LICENSE
   summary: Improved build system generator for CPython C extensions.
-  doc_url: http://scikit-build.readthedocs.org
-  dev_url: http://github.com/scikit-build/scikit-build
+  description: |
+    scikit-build is an improved build system generator for CPython
+    C/C++/Fortran/Cython extensions. It provides better support for additional
+    compilers, build systems, cross compilation, and locating dependencies and
+    their associated build requirements. The scikit-build package is
+    fundamentally just glue between the setuptools Python module and CMake.
+
+  doc_url: https://scikit-build.readthedocs.org
+  dev_url: https://github.com/scikit-build/scikit-build
 
 extra:
   recipe-maintainers:
