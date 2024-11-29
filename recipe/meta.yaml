@@ -1,9 +1,9 @@
 {% set name = "scikit-build" %}
-{% set version = "0.15.0" %}
-{% set sha256 = "e723cd0f3489a042370b9ea988bbb9cfd7725e8b25b20ca1c7981821fcf65fb9" %}
+{% set version = "0.18.1" %}
+{% set sha256 = "a4152ac5a084d499c28a7797be0628d8366c336e2fb0e1a063eb32e55efcb8e7" %}
 
 package:
-  name:  {{ name|lower }}
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
@@ -12,20 +12,15 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   host:
     - python
-    - cython >=0.25.1
-    - packaging
-    - path.py >=11.5.0
     - pip
-    - python-build >=0.7
-    - setuptools >=42
-    - setuptools_scm
-    - toml
-    - wheel
+    - hatchling
+    - hatch-fancy-pypi-readme
+    - hatch-vcs
   run:
     - python
     - cmake
@@ -34,12 +29,14 @@ requirements:
     - packaging
     - setuptools >=42.0.0
     - wheel >=0.32.0
+    - tomli # [py<311]
 
 test:
   imports:
     - skbuild
   source_files:
     - tests/*
+    - pyproject.toml
   requires:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
@@ -47,23 +44,20 @@ test:
     - cython
     - git
     - make  # [not win]
-    - mock
     - ninja
     - path.py >=11.5.0
     - pip
-    - pytest >=4.5.0
-    - pytest-cov >=2.7.1
+    - python-build
+    - pytest >=6.0.0
     - pytest-mock >=1.10.4
-    - pytest-runner >=5.1
     - requests
-    - six >=1.10.0
+    - virtualenv
 
 about:
   home: https://github.com/scikit-build/scikit-build
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  license_url: https://github.com/scikit-build/scikit-build/blob/master/LICENSE
   summary: Improved build system generator for CPython C extensions.
   description: |
     scikit-build is an improved build system generator for CPython
