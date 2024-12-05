@@ -7,7 +7,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/s/scikit-build/scikit-build-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/scikit_build-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
@@ -27,7 +27,8 @@ requirements:
     - distro
     - make  # [not win]
     - packaging
-    - setuptools >=42.0.0
+    # requires distutils.dir_util._path_created which was removed in setuptools 75
+    - setuptools >=42.0.0,<75.0.0
     - wheel >=0.32.0
     - tomli # [py<311]
 
