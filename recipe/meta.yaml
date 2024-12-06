@@ -48,11 +48,12 @@ test:
     - ninja
     - path.py >=11.5.0
     - pip
-    - python-build
     - pytest >=6.0.0
     - pytest-mock >=1.10.4
     - requests
+    - setuptools
     - virtualenv
+    - wheel
 
 about:
   home: https://github.com/scikit-build/scikit-build
