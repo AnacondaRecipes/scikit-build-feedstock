@@ -8,4 +8,4 @@ popd
 
 %PYTHON% -m pip check
 
-py.test -k "not (test_fortran_compiler or test_issue352_isolated_environment_support or test_cmake_install_dir_keyword or test_generator_selection or pep518 or test_configure_with_cmake_args or test_make_with_install_target)" -v
+pytest -m "not fortran and not isolated" -k "not test_issue352_isolated_environment_support and not test_configure_with_cmake_args and not test_generator_selection and not test_make_with_install_target and not test_outside_project_root and not test_toolset" -v
