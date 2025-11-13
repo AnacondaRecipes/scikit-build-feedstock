@@ -38,6 +38,7 @@ test:
     - tests/*
     - pyproject.toml
   requires:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
