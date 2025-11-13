@@ -1,6 +1,5 @@
 {% set name = "scikit-build" %}
 {% set version = "0.18.1" %}
-{% set sha256 = "a4152ac5a084d499c28a7797be0628d8366c336e2fb0e1a063eb32e55efcb8e7" %}
 
 package:
   name: {{ name|lower }}
@@ -8,10 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/scikit_build-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: a4152ac5a084d499c28a7797be0628d8366c336e2fb0e1a063eb32e55efcb8e7
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
@@ -39,6 +38,7 @@ test:
     - tests/*
     - pyproject.toml
   requires:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
