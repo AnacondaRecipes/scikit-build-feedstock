@@ -38,6 +38,7 @@ test:
     - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
     - cmake
     - cython
     - git
