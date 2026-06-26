@@ -1,16 +1,16 @@
 {% set name = "scikit-build" %}
-{% set version = "0.18.1" %}
+{% set version = "0.19.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/scikit_build-{{ version }}.tar.gz
-  sha256: a4152ac5a084d499c28a7797be0628d8366c336e2fb0e1a063eb32e55efcb8e7
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/scikit_build-{{ version }}.tar.gz
+  sha256: b9a8d07fca2d5d10d93220bc57a685161d72af1fc76285d55c564ddaa862e584
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
@@ -22,12 +22,9 @@ requirements:
     - hatch-vcs
   run:
     - python
-    - cmake
     - distro
-    - make  # [not win]
     - packaging
-    # requires distutils.dir_util._path_created which was removed in setuptools 75
-    - setuptools >=42.0.0,<75.0.0
+    - setuptools >=42.0.0
     - wheel >=0.32.0
     - tomli # [py<311]
 
@@ -41,12 +38,12 @@ test:
     - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
     - cmake
     - cython
     - git
     - make  # [not win]
     - ninja
-    - path.py >=11.5.0
     - pip
     - pytest >=6.0.0
     - pytest-mock >=1.10.4
@@ -68,7 +65,7 @@ about:
     their associated build requirements. The scikit-build package is
     fundamentally just glue between the setuptools Python module and CMake.
 
-  doc_url: https://scikit-build.readthedocs.org
+  doc_url: https://scikit-build.readthedocs.io
   dev_url: https://github.com/scikit-build/scikit-build
 
 extra:
@@ -77,3 +74,5 @@ extra:
     - scopatz
     - jcfr
     - msarahan
+  skip-lints:
+    - python_build_tools_in_host  # setuptools is a runtime dep (setuptools ↔ CMake glue)
