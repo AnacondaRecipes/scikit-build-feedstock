@@ -10,7 +10,7 @@ source:
   sha256: b9a8d07fca2d5d10d93220bc57a685161d72af1fc76285d55c564ddaa862e584
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
@@ -40,6 +40,7 @@ test:
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - cmake
+    - libpython # [py>=315] for test_get_python_library
     - cython
     - git
     - make  # [not win]
